@@ -1,5 +1,21 @@
 # tutorial
 
+## What and why WebAssembly, a bit of history
+- NaCL/PNaCl, asm.js: too slow
+- wasm: 
+  - fast 
+  - all major tech companies in support
+  - overcomes many disadvantages of pure javascript (compilation, optimization, size, ...)
+  - does not matter anymore which language you pick
+  - still making specs based on proposals
+  - reports a lot of improvement on speed
+- recent movements
+  - off-the-browser: WASI
+  - Photoshop, AutoCAD, Google Earth, ...
+  - involvement in blockchain
+  - danger (binary)
+  - advent of wasm standalone runtimes like `wasmtime`
+
 ## Basic setup for **emscripten**
 ### 1. Download & configure emscripten
 
