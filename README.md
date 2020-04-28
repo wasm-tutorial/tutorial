@@ -149,11 +149,12 @@ http-server --cors . # current directory should have .wasm file
 ```html
 <html>
 <head>
+  <script src="http://localhost:8080/hello-world.js"></script>
   <script>
     window.onload = () => {
      const importObject = { imports: { imported_func: arg => console.log(arg) } };
 
-      WebAssembly.instantiateStreaming(fetch('localhost:8000/hello-world.wasm'), importObject)
+      WebAssembly.instantiateStreaming(fetch('http://localhost:8080/hello-world.wasm'), importObject)
       .then(obj => obj.instance.exports.exported_func());
     }
   </script>
