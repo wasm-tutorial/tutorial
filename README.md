@@ -83,7 +83,7 @@ alias emcc="<path-to-emsdk>/upstream/emscripten/emcc"
 $ source ~/.profile
 ```
 
-### 4. Make `hello-world.cpp`
+### 5. Make `hello-world.cpp`
 
 ```
 touch hello-world.cpp
@@ -94,7 +94,7 @@ int main() {
 }"  >> hello-world.cpp
 ```
 
-### 5. Check if `emcc` is working with `hello-world.cpp` example
+### 6. Check if `emcc` is working with `hello-world.cpp` example
 
 ```bash
 $ emcc hello-world.cpp -o hello-world.js # this is going to generate 
@@ -119,3 +119,38 @@ hello-world      hello-world.js   hello-world.wasm
 
 Now you know that `emcc` is working well. 
 
+## Run it from a browser
+### 1. Install and launch http-server to host .wasm file
+
+```bash
+npm i -g http-server
+
+http-server --cors . # current directory should have .wasm file
+```
+
+### 2. Write `index.html`
+
+```html
+<html>
+<head>
+  <script>
+    window.onload = () => {
+     const importObject = { imports: { imported_func: arg => console.log(arg) } };
+
+      WebAssembly.instantiateStreaming(fetch('localhost:8000/hello-world.wasm'), importObject)
+      .then(obj => obj.instance.exports.exported_func());
+    }
+  </script>
+</head>
+<body>
+</body>
+</html>
+```
+
+## Basic setup for Assemblyscript
+
+```bash
+npm install --save-dev assemblyscript
+
+npx asinit .
+```
